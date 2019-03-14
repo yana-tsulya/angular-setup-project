@@ -1,0 +1,28 @@
+
+    <form class="form-inline">
+      <div class="form-group">
+        <input type="text" [(ngModel)]="task" [ngModelOptions]="{standalone: true}"
+               class="form-control" placeholder="Enter task">
+      </div>
+      <button type="submit" class="btn btn-primary" (click)="addTask()">Add task</button>
+    </form>
+
+    <div class="btn-group filters-menu" role="group" aria-label="Task actions">
+      <button type="button" class="btn"
+              [ngClass]="{ 'btn-info': activeFilter === filters['A'],
+                            'btn-outline-info': activeFilter !== filters['A'] }"
+              (click)="show(filters['A'])">All</button>
+      <button type="button" class="btn"
+              [ngClass]="{ 'btn-info': activeFilter === filters['R'],
+                            'btn-outline-info': activeFilter !== filters['R'] }"
+              (click)="show(filters['R'])">Resolved</button>
+    </div>
+
+    <ul class="task-list">
+      <li *ngFor="let item of tasks; let i = index;">
+        <app-task-item [task]="item"
+                       (updateTask)="update($event, i)"
+                       [hidden]="activeFilter === filters['R'] && !item.isChecked"></app-task-item>
+      </li>
+    </ul>
+

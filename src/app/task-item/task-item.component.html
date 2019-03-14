@@ -1,0 +1,13 @@
+<p>{{ task.text }}</p>
+
+{{ task | json }}
+
+<div class="btn-group btn-group-sm" role="group" aria-label="Task actions">
+  <button type="button"
+          class="btn btn-outline-danger"
+          (click)="removeTask()">Remove</button>
+  <button type="button" *ngIf="!task.isChecked"
+          class="btn btn-outline-success"
+          (click)="resolveTask()">Resolve</button>
+  <!--<button type="button" class="btn btn-outline-warning">Edit</button>-->
+</div>
